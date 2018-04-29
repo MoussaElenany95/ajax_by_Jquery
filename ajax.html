@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Ajax tutorial</title>
+    <script src="jquery.js" ></script>
+    <script>
+
+        $(document).ready(function () {
+            $("#submit").click(function () {
+
+                $("#submit").prop("disabled",true);
+
+                var name     = $("#name").val();
+                var email    = $("#email").val();
+                var password = $("#password").val();
+                var phone    = $("#phone").val();
+                $.ajax({
+
+                        url : "test.php",
+                        data:{
+                            signup:true,name : name,email: email,password:password,phone:phone
+                        },
+                        method:"POST",
+                        success:function (result) {
+
+                            $("#msg").html(result);
+                            $("#submit").prop("disabled",false);
+                        }
+
+
+                    }
+                )
+            })
+
+
+        });
+    </script>
+    <style>
+        body{
+            padding: 0;
+            margin: 0;
+        }
+        #box{
+            padding-top: 50px;
+            text-align: center;
+            background-color: gray;
+            height: 300px;
+            width: 300px;
+            margin: 0 auto;
+        }
+    </style>
+</head>
+<body>
+    <div id="box">
+        <input name="name" id="name"  placeholder="Enter your name"><br><br>
+        <input name="email" type="email" id="email" placeholder="Enter your email"><br><br>
+        <input name="phone" type="number" id="phone" placeholder="Enter your phone" ><br><br>
+        <input type="password" name="password" id="password" placeholder="Enter your password"><br>
+        <input type="submit" id="submit" value="Sign up" ><br>
+        <div id="msg">
+
+        </div>
+
+    </div>
+
+</body>
+</html>
